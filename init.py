@@ -19,27 +19,9 @@ while True:
 
         if opcion == 1:
             print("Selecionaste Opcion 1")
+            p = ProcessImage()
+            p.copiar()       
         
-            import os
-            import shutil
-            
-            while True:
-                print("Presione 0 para salir")
-                origen = input("Ruta de la imagen:").strip()
-                os.chdir("../nuevo")
-                destino = os.getcwd()
-                print(destino)
-                
-                try:
-                    shutil.copy(origen, destino)
-                    print(f"Archivo copiado de '{origen}' a '{destino}'")   
-                    break                 
-                except Exception as e:
-                    print(f"Error al copiar: {e}")                    
-                
-                if origen == '0':
-                    break                        
-            
         elif opcion == 2:
             print("Selecionaste Opcion 2")
         elif opcion == 3:
