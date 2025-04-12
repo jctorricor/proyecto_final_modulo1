@@ -1,1 +1,1 @@
-__all__ = ["crud"]
+__all__ = ["crud","covid","dataload"]
