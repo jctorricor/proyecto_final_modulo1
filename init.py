@@ -31,8 +31,9 @@ while True:
                 print(destino)
                 
                 try:
-                    shutil.copyfile(origen, destino)
-                    print(f"Archivo copiado de '{origen}' a '{destino}'")                    
+                    shutil.copy(origen, destino)
+                    print(f"Archivo copiado de '{origen}' a '{destino}'")   
+                    break                 
                 except Exception as e:
                     print(f"Error al copiar: {e}")                    
                 
