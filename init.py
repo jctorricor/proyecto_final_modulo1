@@ -1,3 +1,9 @@
+from data_load.read_images import File
+
+file = File()
+file._data_load('covid/images')
+#file.show_data()
+    
 while True:
     print("-" * 50)
     print("Gestionar imagenes de COVID-19 Radiography Database:")
@@ -10,13 +16,13 @@ while True:
     opcion = int(input("Opcion: "))
 
     if opcion == 1:
-        print("Seleecionaste Opcion 1")
+        print("Selecionaste Opcion 1")
     elif opcion == 2:
-        print("Seleecionaste Opcion 2")
+        print("Selecionaste Opcion 2")
     elif opcion == 3:
-        print("Seleecionaste Opcion 3")
+        print("Selecionaste Opcion 3")
     elif opcion == 0:
-        print("Seleecionaste Opcion 0")
+        print("Selecionaste Opcion 0")
         break
     else:       
         print("Opcion no valida seleccione una opcion de la lista")
