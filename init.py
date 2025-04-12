@@ -1,4 +1,5 @@
 from data_load.read_images import File
+from crud.agregar import ProcessImage
 
 file = File()
 file._data_load('covid/images')
@@ -6,11 +7,11 @@ file._data_load('covid/images')
     
 while True:
     print("-" * 54)
-    print("Gestionar imagenes de COVID-19 Radiography Database:")
+    print("\nGestionar imagenes de COVID-19 Radiography Database:\n")
     print("       1: Agregar nueva imagen")
     print("       2: Modificar imagen")
     print("       3: Eliminar imagen")
-    print("       0: Salir")
+    print("       0: Salir\n")
     print("-" * 54)
 
     try:
@@ -18,6 +19,26 @@ while True:
 
         if opcion == 1:
             print("Selecionaste Opcion 1")
+        
+            import os
+            import shutil
+            
+            while True:
+                print("Presione 0 para salir")
+                origen = input("Ruta de la imagen:").strip()
+                os.chdir("../nuevo")
+                destino = os.getcwd()
+                print(destino)
+                
+                try:
+                    shutil.copyfile(origen, destino)
+                    print(f"Archivo copiado de '{origen}' a '{destino}'")                    
+                except Exception as e:
+                    print(f"Error al copiar: {e}")                    
+                
+                if origen == '0':
+                    break                        
+            
         elif opcion == 2:
             print("Selecionaste Opcion 2")
         elif opcion == 3:
