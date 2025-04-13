@@ -1,4 +1,5 @@
-# proyecto_final_modulo1
+# Proyecto Final Modulo 1 - Maestria en Ciencia de Datos e Intelegencia Artificial
+# Docente: Msc. Edwin Salcedo
 Proyecto Final del Modulo I - Maestria en Ciencia de Datos e Inteligencia Artificial
 
 # Diagrama de paquetes
