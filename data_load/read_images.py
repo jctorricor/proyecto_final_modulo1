@@ -7,7 +7,48 @@ class File:
         """
         self.images = {}
     
-    def _data_load(self, images_dir):
+    def _get_config_path(self):
+        import os 
+
+        path = os.getcwd()
+
+    def _data_process(self, path):
+        """
+        Funcion para agregar los datos de los archivos al diccionario
+        
+        Parameters
+        ----------
+        path: str
+            Ruta al directorio que contiene los archivos a procesar y cargar al diccionario
+        
+        Returns
+        -------
+        None: none
+            No devuelve ningun valor 
+
+        """
+        import os
+
+        try:
+            for file in os.listdir(path):
+                file_name = os.path.splitext(file)
+                lista = file_name[0].split("-")
+                id = lista[1]
+                extension = file_name[1][1:]            
+                ruta = os.path.join(path, file)            
+                tamaño = os.path.getsize(ruta)
+                self.images[id] = {"id": id, 
+                                "filename": file, 
+                                "extension": extension, 
+                                "path": ruta, 
+                                "size": tamaño}            
+                print(file, "File Loaded ")
+        except Exception as e:
+            print("No se pudo leer la ruta especificada:")
+            print("\nERROR: ", e, "\n")
+
+
+    def _data_load(self):
         """
         Funcion de cargado de datos iniciales sobre las imagenes
         Genera la metadata de los archivos y los guarda en un 
@@ -27,33 +68,10 @@ class File:
         import os
         
         curr_dir = os.getcwd()
-        
-        try:
-            os.chdir(os.path.join(curr_dir, images_dir))
-        except Exception as e:
-            print("No existe la ruta especificada favor corriga el error:")
-            print("\nERROR: ", e, "\n")
-        
-        curr_dir = os.getcwd()
         print("Loading files........")
+        path = os.path.join(curr_dir, "covid/images")
+        _data_process(path)
         
-        try:
-            for file in os.listdir(curr_dir):
-                file_name = os.path.splitext(file)
-                lista = file_name[0].split("-")
-                id = lista[1]
-                extension = file_name[1][1:]            
-                ruta = os.path.join(curr_dir, file)            
-                tamaño = os.path.getsize(ruta)
-                self.images[id] = {"id": id, 
-                                "filename": file, 
-                                "extension": extension, 
-                                "path": ruta, 
-                                "size": tamaño}            
-                print(file, "File Loaded ")
-        except Exception as e:
-            print("No se pudo leer la ruta especificada:")
-            print("\nERROR: ", e, "\n")
     
     def copy(self, source, destination):
         """
@@ -81,13 +99,38 @@ class File:
             shutil.copy(source, destination)
             resultado = True
         except Exception as e:
-            print("Se genero un error...........")
             print("\nERROR: ", e, "\n")
         
         return resultado
             
+    def _del_file_procesado(self, path, filename):
+        """
+        Funcion para eliminar el archivo de la ruta especificada y nombre de archivo
+
+        Parameters
+        ----------
+        source: str
+            Ruta del archivo a procesar
+        filename: str
+            nombre del archivo a processar
         
-                
+        Returns
+        -------
+        None: none
+           sin ningun valor a retornar
+           
+        """
+        import os
+
+        ruta_archivo = os.path.join(path, filename)
+        if os.path.exists(ruta_archivo):
+            try:
+                os.remove(ruta_archivo)    
+
+            except Exception as e:
+                print("ERROR: ",e)
+
+
     def show_data(self):
         """
         Funcion que muestra los datos del diccionario relaciondos a imagenes
@@ -106,5 +149,5 @@ class File:
             
 if __name__ == "__main__":
     file = File()
-    file._data_load('../covid/images')
+    file._data_load()
     file.show_data()

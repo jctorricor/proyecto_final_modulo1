@@ -2,7 +2,7 @@ from data_load.read_images import File
 from crud.agregar import ProcessImage
 
 file = File()
-file._data_load('covid/images')
+file._data_load()
 #file.show_data()
     
 while True:
@@ -18,9 +18,10 @@ while True:
         opcion = int(input("Opcion: "))
 
         if opcion == 1:
-            print("Selecionaste Opcion 1")
             p = ProcessImage()
-            p.copiar()       
+            p.copiar() 
+            file._data_process("")      
+            file._del_file_procesado("", "")
         
         elif opcion == 2:
             print("Selecionaste Opcion 2")
