@@ -7,7 +7,7 @@ Proyecto Final del Modulo I - Maestria en Ciencia de Datos e Inteligencia Artifi
 
 # Dataset utilizado - [COVID-19 Radiograpy Database](https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database) 
 
-![Radiografia](https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-1.png)(https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-50.png)(https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-60.png)(https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-90.png)
+![Radiografia COVID-1.png](https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-1.png)![Radiografia COVID-50.png](https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-50.png)![Radiografia COVID-60.png](https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-60.png)![Radiografia COVID-90.png](https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-90.png)
 
 # Módulo modificar.py
 Descripción General
