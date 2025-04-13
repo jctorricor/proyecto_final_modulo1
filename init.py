@@ -1,3 +1,6 @@
+from crud.modificar import renombrar_archivo
+
+
 while True:
     print("-" * 50)
     print("Gestionar imagenes de COVID-19 Radiography Database:")
@@ -13,6 +16,7 @@ while True:
         print("Seleecionaste Opcion 1")
     elif opcion == 2:
         print("Seleecionaste Opcion 2")
+        renombrar_archivo()
     elif opcion == 3:
         print("Seleecionaste Opcion 3")
     elif opcion == 0:
