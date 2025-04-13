@@ -12,7 +12,7 @@ class File:
 
         path = os.getcwd()
 
-    def _data_process(self, path):
+    def _data_process(self, path, type_recurso=1):
         """
         Funcion para agregar los datos de los archivos al diccionario
         
@@ -20,32 +20,58 @@ class File:
         ----------
         path: str
             Ruta al directorio que contiene los archivos a procesar y cargar al diccionario
-        
+        type_recurso: int
+            tipo de recurso a procesar 
+                1 archivo 
+                2 directorio
+
         Returns
         -------
-        None: none
-            No devuelve ningun valor 
+        bool: True/False
+            True si es correcto el procesamiento
+            False si genero algun error 
 
         """
         import os
 
         try:
-            for file in os.listdir(path):
-                file_name = os.path.splitext(file)
+            if type_recurso == 2:
+                for file in os.listdir(path):
+                    file_name = os.path.splitext(file)
+                    lista = file_name[0].split("-")
+                    id = lista[1]
+                    extension = file_name[1][1:]            
+                    ruta = os.path.join(path, file)            
+                    tamaño = os.path.getsize(ruta)
+                    self.images[id] = {"id": id, 
+                                    "filename": file, 
+                                    "extension": extension, 
+                                    "path": ruta, 
+                                    "size": tamaño}            
+                    print(file, "File Loaded ")
+                    return True
+            
+            elif type_recurso == 1:            
+                file_name = os.path.splitext(path)
                 lista = file_name[0].split("-")
                 id = lista[1]
-                extension = file_name[1][1:]            
-                ruta = os.path.join(path, file)            
-                tamaño = os.path.getsize(ruta)
+                extension = file_name[1][1:]                                   
+                tamaño = os.path.getsize(path)
+                pathfile, file = os.path.split(path)
                 self.images[id] = {"id": id, 
                                 "filename": file, 
                                 "extension": extension, 
-                                "path": ruta, 
+                                "path": path, 
                                 "size": tamaño}            
                 print(file, "File Loaded ")
+                return True
+            else:
+                return False
+                
         except Exception as e:
-            print("No se pudo leer la ruta especificada:")
+            print("No se pudo leer la ruta especificada: ",path, type_recurso)
             print("\nERROR: ", e, "\n")
+            return False
 
 
     def _data_load(self):
@@ -70,7 +96,7 @@ class File:
         curr_dir = os.getcwd()
         print("Loading files........")
         path = os.path.join(curr_dir, "covid/images")
-        _data_process(path)
+        self._data_process(path,2)
         
     
     def copy(self, source, destination):
@@ -103,7 +129,7 @@ class File:
         
         return resultado
             
-    def _del_file_procesado(self, path, filename):
+    def _del_file_procesado(self, pathfile):
         """
         Funcion para eliminar el archivo de la ruta especificada y nombre de archivo
 
@@ -122,10 +148,9 @@ class File:
         """
         import os
 
-        ruta_archivo = os.path.join(path, filename)
-        if os.path.exists(ruta_archivo):
+        if os.path.exists(pathfile):
             try:
-                os.remove(ruta_archivo)    
+                os.remove(pathfile)    
 
             except Exception as e:
                 print("ERROR: ",e)

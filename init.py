@@ -19,9 +19,13 @@ while True:
 
         if opcion == 1:
             p = ProcessImage()
-            p.copiar() 
-            file._data_process("")      
-            file._del_file_procesado("", "")
+            pathfile = p.copiar() 
+            print(pathfile)
+            procesado = file._data_process(pathfile)
+            
+            if procesado:      
+                file._del_file_procesado(pathfile)
+            file.show_data()
         
         elif opcion == 2:
             print("Selecionaste Opcion 2")
