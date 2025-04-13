@@ -49,7 +49,8 @@ class File:
                                     "path": ruta, 
                                     "size": tamaño}            
                     print(file, "File Loaded ")
-                    return True
+                
+                return True
             
             elif type_recurso == 1:            
                 file_name = os.path.splitext(path)
@@ -96,6 +97,7 @@ class File:
         curr_dir = os.getcwd()
         print("Loading files........")
         path = os.path.join(curr_dir, "covid/images")
+        print("RUTA A LEER ARCHIVOS: ",path)
         self._data_process(path,2)
         
     
@@ -147,9 +149,15 @@ class File:
            
         """
         import os
+        import shutil
 
         if os.path.exists(pathfile):
             try:
+                ruta_images = os.getcwd()
+                ruta_images = os.path.join(ruta_images,'covid/images')
+                path, filename = os.path.split(pathfile)
+                ruta_images = os.path.join(ruta_images, filename)
+                shutil.copy2(pathfile,ruta_images)
                 os.remove(pathfile)    
 
             except Exception as e:
