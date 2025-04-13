@@ -1,15 +1,13 @@
 # proyecto_final_modulo1
 Proyecto Final del Modulo I - Maestria en Ciencia de Datos e Inteligencia Artificial
 
-# Módulo modificar.py
-Descripción General
-modificar.py es un modulo de los 3 requeridos para el proyecto (Agregar, Modificar y eliminar) enfocado en las imágenes médicas COVID-19 y las imagenes nuevas que puedan ser agregadas. Su función principal consiste en renombrar la imagen seleccionada sin alterar su formato.
-
+# Diagrama de paquetes
 ![Diagrama de Paquetes](https://drive.google.com/uc?export=view&id=1tD_UTnKBhfv1WXCMjrgrgXEwIWTuh1uL)
 
 
-
-
+# Módulo modificar.py
+Descripción General
+modificar.py es un modulo de los 3 requeridos para el proyecto (Agregar, Modificar y eliminar) enfocado en las imágenes médicas COVID-19 y las imagenes nuevas que puedan ser agregadas. Su función principal consiste en renombrar la imagen seleccionada sin alterar su formato.
 
 Características
 1. Enfoque Específico
