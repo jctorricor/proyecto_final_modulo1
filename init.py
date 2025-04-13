@@ -1,22 +1,20 @@
-from crud.modificar import renombrar_archivo
-
-
 while True:
-    print("-" * 50)
-    print("Gestionar imagenes de COVID-19 Radiography Database:")
+    print("-" * 54)
+    print("\nGestionar imagenes de COVID-19 Radiography Database:\n")
     print("       1: Agregar nueva imagen")
     print("       2: Modificar imagen")
     print("       3: Eliminar imagen")
-    print("       0: Salir")
-    print("-" * 50)
+    print("       4: Mostrar imagenes cargadas")
+    print("       0: Salir\n")
+    print("-" * 54)
 
-    opcion = int(input("Opcion: "))
+    try:
+        opcion = int(input("Opcion: "))
 
     if opcion == 1:
         print("Seleecionaste Opcion 1")
     elif opcion == 2:
         print("Seleecionaste Opcion 2")
-        renombrar_archivo()
     elif opcion == 3:
         print("Seleecionaste Opcion 3")
     elif opcion == 0:
@@ -24,4 +22,4 @@ while True:
         break
     else:       
         print("Opcion no valida seleccione una opcion de la lista")
-                
+        print("\nError: ", e, "\n")
