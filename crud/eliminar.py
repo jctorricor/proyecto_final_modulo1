@@ -4,23 +4,25 @@ from typing import Dict, Optional
 class DeleteImage:
     """Clase para gestionar la eliminación de imágenes y sus metadatos."""
     
-    def __init__(self, data: Dict[str, Dict]):
+    def __init__(self, images: Dict[str, Dict]):
         """
         Inicializa el gestor de eliminación con los datos cargados.
 
         Args:
             data (Dict[str, Dict]): Diccionario con los datos de las imágenes (ID como clave, metadatos y ruta como valor).
         """
-        self.data = data
+        self.images = images
 
     def list_images(self) -> None:
         """Muestra todas las imágenes disponibles."""
-        if not self.data:
+        if not self.images:
             print("No hay imágenes registradas.")
             return
         print("\nImágenes disponibles:")
-        for image_id, info in self.data.items():
-            print(f"ID: {image_id}, Path: {info.get('path', 'N/A')}, Metadata: {info.get('metadata', {})}")
+        for image_id, info in self.images.items():
+            print(f"ID: {image_id}, Filename: {info.get('filename', 'N/A')}, "
+                  f"Extension: {info.get('extension', 'N/A')}, Path: {info.get('path', 'N/A')}, "
+                  f"Size: {info.get('size', 'N/A')} bytes")
 
     def delete(self, image_id: str) -> bool:
         """
@@ -33,13 +35,13 @@ class DeleteImage:
             bool: True si la eliminación fue exitosa, False si hubo un error o se canceló.
         """
         try:
-            if image_id not in self.data:
+            if image_id not in self.images:
                 print(f"No se encontró la imagen con ID {image_id}.")
                 return False
 
-            image_info = self.data[image_id]
+            image_info = self.images[image_id]  
             file_path = image_info.get("path", "")
-            print(f"¿Está seguro de eliminar la imagen {image_id}? (s/n)")
+            print(f"¿Está seguro de eliminar la imagen {image_id} ({image_info.get('filename', 'N/A')})? (s/n)")
             confirmation = input().strip().lower()
             if confirmation != 's':
                 print("Eliminación cancelada.")
@@ -53,12 +55,8 @@ class DeleteImage:
                 print(f"Advertencia: El archivo {file_path} no se encontró en el disco.")
 
             # Eliminar del registro
-            del self.data[image_id]
+            del self.images[image_id]
             print(f"Imagen {image_id} eliminada exitosamente del sistema.")
             return True
 
-        except PermissionError:
-            print(f"Error: No se tienen permisos para eliminar el archivo {file_path}.")
-            return False
-        except Exception as e:
-            print(f"Error al eliminar la imagen: {str(e)}")
+        
