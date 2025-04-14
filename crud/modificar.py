@@ -1,4 +1,5 @@
 import os
+import time
 
 def mostrar_menu_carpetas():
     print("SELECCIONA CARPETA".center(50, '='))
@@ -15,79 +16,122 @@ def lista_archivos(ruta):
     try:
         archivos = [f for f in os.listdir(ruta) if os.path.isfile(os.path.join(ruta, f))]
         if not archivos:
-            print("\n No se encontraron archivos en esta carpeta")
+            print("\n⚠️ No hay archivos en esta carpeta")
             return None
         
-        print("\n ARCHIVOS DISPONIBLES:")
+        print("\n📋 ARCHIVOS DISPONIBLES:")
         for i, archivo in enumerate(archivos, 1):
             print(f"{i:>2}. {archivo}")
         return archivos
     except FileNotFoundError:
-        print(f"\n ERROR: La carpeta no existe: {ruta}")
+        print(f"\n Error: La carpeta no existe: {ruta}")
         return None
 
-def renombrar_archivo():
-    ruta_base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+def renombrar_archivo(file_instance=None):
+    # Ruta absoluta garantizada para Windows
+    proyecto_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    covid_dir = os.path.normpath(os.path.join(proyecto_dir, "covid"))
     
+    print(f"\nDEBUG: Ruta covid confirmada: {covid_dir}")
+    print(f"DEBUG: Contenido real: {os.listdir(covid_dir)}")
+
     while True:
-        mostrar_menu_carpetas()
-        opcion = input("\n  Seleccione carpeta (0-2): ").strip()
+        print("\n" + "="*50)
+        print("MODIFICAR ARCHIVO".center(50))
+        print("1. images\n2. nuevo\n0. Volver")
+        
+        opcion = input("\nSeleccione carpeta (0-2): ").strip()
         
         if opcion == "0":
-            print("\n Programa terminado")
-            break
+            return True
             
         if opcion not in ["1", "2"]:
-            print("\n ERROR: Opción no válida")
+            print("\n❌ Opción no válida")
             continue
             
         subcarpeta = "images" if opcion == "1" else "nuevo"
-        ruta_completa = os.path.join(ruta_base, "covid", subcarpeta)
+        target_dir = os.path.normpath(os.path.join(covid_dir, subcarpeta))
         
-        archivos = lista_archivos(ruta_completa)
-        if not archivos:
+        # Verificación EXTREMA
+        if not os.path.exists(target_dir):
+            print(f"\n❌ ERROR: No existe la carpeta: {target_dir}")
             continue
             
+        # Listado SEGURO de archivos
+        archivos = []
+        for f in os.listdir(target_dir):
+            full_path = os.path.join(target_dir, f)
+            if os.path.isfile(full_path):
+                archivos.append(f)
+        
+        if not archivos:
+            print(f"\nℹ️ No hay archivos en {subcarpeta}/")
+            continue
+            
+        print("\n📋 Archivos disponibles:")
+        for i, archivo in enumerate(archivos, 1):
+            print(f"{i}. {archivo}")
+            
+        # Validación ROBUSTA
         try:
-            seleccion = int(input("\n🔢 Ingrese número de archivo (0 para cancelar): "))
+            seleccion = int(input("\nNúmero de archivo (0 para cancelar): "))
             if seleccion == 0:
                 continue
-            if seleccion < 1 or seleccion > len(archivos):
-                print("\n ERROR: Número fuera de rango")
-                continue
-        except ValueError:
-            print("\n ERROR: Debe ingresar un número válido")
+            archivo_original = archivos[seleccion-1]
+        except (ValueError, IndexError):
+            print("\n❌ Selección inválida")
             continue
             
-        archivo_original = archivos[seleccion-1]
-        extension_actual = extension(archivo_original)
+        # Proceso de renombrado
+        nombre_base, ext = os.path.splitext(archivo_original)
+        nuevo_nombre = input("Nuevo nombre (sin extensión): ").strip()
         
-        print(f"\n  Archivo seleccionado: {archivo_original}")
-        print(f" Extensión detectada: {extension_actual}")
-        
-        nuevo_nombre_base = input("\n Ingrese NUEVO NOMBRE (sin extensión): ").strip()
-        
-        if not nuevo_nombre_base:
-            print("\n ERROR: El nombre no puede estar vacío")
+        if not nuevo_nombre:
+            print("\n⚠️ El nombre no puede estar vacío")
             continue
             
-        nuevo_nombre_completo = f"{nuevo_nombre_base}{extension_actual}"
+        nuevo_nombre_completo = f"{nuevo_nombre}{ext}"
+        vieja_ruta = os.path.join(target_dir, archivo_original)
+        nueva_ruta = os.path.join(target_dir, nuevo_nombre_completo)
         
-        confirmacion = input(f"\n¿Confirmar cambio de '{archivo_original}' a '{nuevo_nombre_completo}'? (s/n): ").lower()
-        if confirmacion != 's':
-            print("\n Operación cancelada")
-            continue
-            
         try:
-            os.rename(
-                os.path.join(ruta_completa, archivo_original),
-                os.path.join(ruta_completa, nuevo_nombre_completo)
-            )
-            print(f"\n ÉXITO: Archivo renombrado correctamente")
-            print(f"   Anterior: {archivo_original}")
-            print(f"   Nuevo: {nuevo_nombre_completo}")
+            # 1. Renombrar físicamente
+            os.rename(vieja_ruta, nueva_ruta)
+            print(f"\n✅ Archivo renombrado: {archivo_original} → {nuevo_nombre_completo}")
+            
+            # 2. Actualización OBLIGATORIA de metadata
+            if file_instance:
+                if hasattr(file_instance, 'metadata') and archivo_original in file_instance.metadata:
+                    file_instance.metadata[nuevo_nombre_completo] = file_instance.metadata.pop(archivo_original)
+                    file_instance.metadata[nuevo_nombre_completo]['filename'] = nuevo_nombre_completo
+                    file_instance.metadata[nuevo_nombre_completo]['path'] = nueva_ruta
+                    file_instance.metadata[nuevo_nombre_completo]['size'] = os.path.getsize(nueva_ruta)
+                    file_instance.metadata[nuevo_nombre_completo]['last_modified'] = os.path.getmtime(nueva_ruta)
+                
+                # Eliminar entrada vieja SI existe
+                if archivo_original in file_instance.metadata:
+                    del file_instance.metadata[archivo_original]
+                
+                # Crear NUEVA entrada con datos actualizados
+                file_instance.metadata[nuevo_nombre_completo] = {
+                    'filename': nuevo_nombre_completo,
+                    'path': nueva_ruta,
+                    'size': os.path.getsize(nueva_ruta),
+                    'last_modified': os.path.getmtime(nueva_ruta)
+                }
+                print("♻️ Metadata actualizada CORRECTAMENTE")
+            
+            # 3. Verificación INMEDIATA
+            print("\n🔥 VERIFICACIÓN:")
+            print(f"Archivo físico: {'EXISTE' if os.path.exists(nueva_ruta) else 'NO EXISTE'}")
+            if file_instance and hasattr(file_instance, 'metadata'):
+                print(f"En metadata: {'SÍ' if nuevo_nombre_completo in file_instance.metadata else 'NO'}")
+            
+            return True
+            
         except Exception as e:
-            print(f"\n ERROR: No se pudo renombrar - {str(e)}")
+            print(f"\n❌ Error al renombrar: {str(e)}")
+            return False
 
 if __name__ == "__main__":
     renombrar_archivo()
