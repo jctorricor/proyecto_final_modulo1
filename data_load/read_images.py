@@ -2,121 +2,98 @@ class File:
     
     def __init__(self):
         """
-        Constructor de la clase File, inicializa el diccionario images
-        
+        Constructor de la clase File, inicializa los diccionarios images y metadata.
         """
-        self.images = {}
+        self.images = {}  # Mantener por compatibilidad, pero no se usa
+        self.metadata = {}  # Inicializar metadata
     
     def _get_config_path(self):
+        """
+        Obtiene el directorio de trabajo actual.
+        """
         import os 
-
-        path = os.getcwd()
+        return os.getcwd()
 
     def _data_process(self, path, type_recurso=1):
         """
-        Funcion para agregar los datos de los archivos al diccionario
-        
+        Procesa archivos o directorios y actualiza los metadatos.
+
         Parameters
         ----------
         path: str
-            Ruta al directorio que contiene los archivos a procesar y cargar al diccionario
+            Ruta al archivo o directorio a procesar.
         type_recurso: int
-            tipo de recurso a procesar 
-                1 archivo 
-                2 directorio
+            Tipo de recurso a procesar (1: archivo, 2: directorio).
 
         Returns
         -------
-        bool: True/False
-            True si es correcto el procesamiento
-            False si genero algun error 
-
+        bool: True si el procesamiento fue exitoso, False si hubo error.
         """
         import os
 
         try:
-            if type_recurso == 2:
+            if type_recurso == 2:  # Directorio
                 for file in os.listdir(path):
-                    file_name = os.path.splitext(file)
-                    lista = file_name[0].split("-")
-                    id = lista[1]
-                    extension = file_name[1][1:]            
-                    ruta = os.path.join(path, file)            
-                    tamaño = os.path.getsize(ruta)
-                    self.images[id] = {"id": id, 
-                                    "filename": file, 
-                                    "extension": extension, 
-                                    "path": ruta, 
-                                    "size": tamaño}            
-                    print(file, "File Loaded ")
-                
+                    file_path = os.path.join(path, file)
+                    if os.path.isfile(file_path):
+                        self.metadata[file] = {
+                            'filename': file,
+                            'path': file_path,
+                            'size': os.path.getsize(file_path),
+                            'last_modified': os.path.getmtime(file_path)
+                        }
+                        print(file, "File Loaded ")
                 return True
             
-            elif type_recurso == 1:            
-                file_name = os.path.splitext(path)
-                lista = file_name[0].split("-")
-                id = lista[1]
-                extension = file_name[1][1:]                                   
-                tamaño = os.path.getsize(path)
-                pathfile, file = os.path.split(path)
-                self.images[id] = {"id": id, 
-                                "filename": file, 
-                                "extension": extension, 
-                                "path": path, 
-                                "size": tamaño}            
-                print(file, "File Loaded ")
-                return True
+            elif type_recurso == 1:  # Archivo
+                if os.path.isfile(path):
+                    filename = os.path.basename(path)
+                    self.metadata[filename] = {
+                        'filename': filename,
+                        'path': path,
+                        'size': os.path.getsize(path),
+                        'last_modified': os.path.getmtime(path)
+                    }
+                    print(filename, "File Loaded ")
+                    return True
+                return False
+            
             else:
                 return False
                 
         except Exception as e:
-            print("No se pudo leer la ruta especificada: ",path, type_recurso)
+            print("No se pudo leer la ruta especificada: ", path, type_recurso)
             print("\nERROR: ", e, "\n")
             return False
 
-
     def _data_load(self):
         """
-        Funcion de cargado de datos iniciales sobre las imagenes
-        Genera la metadata de los archivos y los guarda en un 
-        diccionario datos
-        
-        Parameters
-        ----------
-        images_dir: str
-            Directorio que contiene las imagenes
-        
-        Returns
-        --------
-        None: none
-            No retorna ningun objeto simplemente carga los datos en un diccionario
-                        
+        Carga los datos iniciales de las imágenes desde covid/images y covid/nuevo.
         """
         import os
         
         curr_dir = os.getcwd()
         print("Loading files........")
-        path = os.path.join(curr_dir, "covid/images")
-        print("RUTA A LEER ARCHIVOS: ",path)
-        self._data_process(path,2)
-        
+        for folder in ["covid/images", "covid/nuevo"]:
+            path = os.path.join(curr_dir, folder)
+            if os.path.exists(path):
+                print("RUTA A LEER ARCHIVOS: ", path)
+                self._data_process(path, 2)
     
     def copy(self, source, destination):
         """
-        Funcion que permite copiar un archivo de una ruta especificada 
-        a nuestra base de imagenes
-        
+        Copia un archivo a la base de imágenes.
+
         Parameters
         ----------
         source: str
-            Direccion origen del archivo
+            Ruta del archivo origen.
         destination: str
-            Direccion de destino para el archivo
-        
+            Ruta de destino.
+
         Returns
         -------
-        bool
-            True/False en caso de exito True caso contrario False
+        bool: True si la copia fue exitosa, False si hubo error.
         """
         import os        
         import shutil
@@ -127,56 +104,47 @@ class File:
             shutil.copy(source, destination)
             resultado = True
         except Exception as e:
-            print("\nERROR: ", e, "\n")
+            print("\nERROR: ", e, "\n")  # Corregido el error de sintaxis
+            return False
         
         return resultado
             
     def _del_file_procesado(self, pathfile):
         """
-        Funcion para eliminar el archivo de la ruta especificada y nombre de archivo
+        Copia un archivo a covid/images y elimina el original.
 
         Parameters
         ----------
-        source: str
-            Ruta del archivo a procesar
-        filename: str
-            nombre del archivo a processar
-        
-        Returns
-        -------
-        None: none
-           sin ningun valor a retornar
-           
+        pathfile: str
+            Ruta del archivo a procesar.
         """
         import os
         import shutil
 
         if os.path.exists(pathfile):
             try:
-                ruta_images = os.getcwd()
-                ruta_images = os.path.join(ruta_images,'covid/images')
-                path, filename = os.path.split(pathfile)
-                ruta_images = os.path.join(ruta_images, filename)
-                shutil.copy2(pathfile,ruta_images)
-                os.remove(pathfile)    
-
+                ruta_images = os.path.join(os.getcwd(), 'covid/images')
+                filename = os.path.basename(pathfile)
+                destino = os.path.join(ruta_images, filename)
+                shutil.copy2(pathfile, destino)
+                os.remove(pathfile)
+                self._data_process(ruta_images, 2)  # Actualizar metadatos
             except Exception as e:
-                print("ERROR: ",e)
-
+                print("ERROR: ", e)
 
     def show_data(self):
         """
-        Funcion que muestra los datos del diccionario relaciondos a imagenes
-        
-        """    
-        try:    
-            for key, valor in self.images.items():
-                print("id:", valor['id'], 
-                    " filename:", valor['filename'], 
-                    " extension:", valor['extension'], 
-                    " path", valor['path'], 
-                    " size:", valor['size']
-                    )            
+        Muestra los datos de los metadatos de las imágenes.
+        """
+        try:
+            if not self.metadata:
+                print("No hay datos para mostrar.")
+                return
+            for filename, data in self.metadata.items():
+                print(f"filename: {filename}, "
+                      f"path: {data['path']}, "
+                      f"size: {data['size']} bytes, "
+                      f"last_modified: {data['last_modified']}")
         except Exception as e:
             print("ERROR: ", e)
             

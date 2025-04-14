@@ -4,44 +4,45 @@ from typing import Dict
 class DeleteImage:
     """Clase para gestionar la eliminación de imágenes y sus metadatos."""
     
-    def __init__(self, images: Dict[str, Dict]):
+    def __init__(self, metadata: Dict[str, Dict]):
         """
-        Inicializa el gestor de eliminación con los datos de las imágenes.
+        Inicializa el gestor de eliminación con los metadatos de las imágenes.
 
         Args:
-            images (Dict[str, Dict]): Diccionario con datos de imágenes (ID como clave, metadatos como valor).
+            metadata (Dict[str, Dict]): Diccionario con metadatos de imágenes (nombre de archivo como clave).
         """
-        self.images = images
+        self.metadata = metadata
 
     def list_images(self) -> None:
         """Muestra todas las imágenes disponibles."""
-        if not self.images:
+        if not self.metadata:
             print("No hay imágenes registradas.")
             return
         print("\nImágenes disponibles:")
-        for image_id, info in self.images.items():
-            print(f"ID: {image_id}, Filename: {info.get('filename', 'N/A')}, "
-                  f"Extension: {info.get('extension', 'N/A')}, Path: {info.get('path', 'N/A')}, "
-                  f"Size: {info.get('size', 'N/A')} bytes")
+        for i, (filename, info) in enumerate(self.metadata.items(), 1):
+            print(f"{i}. Filename: {filename}, "
+                  f"Path: {info.get('path', 'N/A')}, "
+                  f"Size: {info.get('size', 'N/A')} bytes, "
+                  f"Last Modified: {info.get('last_modified', 'N/A')}")
 
-    def delete(self, image_id: str) -> bool:
+    def delete(self, filename: str) -> bool:
         """
-        Elimina una imagen y sus metadatos según su ID, incluyendo el archivo físico.
+        Elimina una imagen y sus metadatos según su nombre de archivo, incluyendo el archivo físico.
 
         Args:
-            image_id (str): Identificador único de la imagen.
+            filename (str): Nombre del archivo de la imagen (e.g., 'covid-001.png').
 
         Returns:
             bool: True si la eliminación fue exitosa, False si hubo un error o se canceló.
         """
         try:
-            if image_id not in self.images:
-                print(f"No se encontró la imagen con ID {image_id}.")
+            if filename not in self.metadata:
+                print(f"No se encontró la imagen con nombre {filename}.")
                 return False
 
-            image_info = self.images[image_id]  
+            image_info = self.metadata[filename]
             file_path = image_info.get("path", "")
-            print(f"¿Está seguro de eliminar la imagen {image_id} ({image_info.get('filename', 'N/A')})? (s/n)")
+            print(f"¿Está seguro de eliminar la imagen {filename}? (s/n)")
             confirmation = input().strip().lower()
             if confirmation != 's':
                 print("Eliminación cancelada.")
@@ -55,8 +56,8 @@ class DeleteImage:
                 print(f"Advertencia: El archivo {file_path} no se encontró en el disco.")
 
             # Eliminar del registro
-            del self.images[image_id]
-            print(f"Imagen {image_id} eliminada exitosamente del sistema.")
+            del self.metadata[filename]
+            print(f"Imagen {filename} eliminada exitosamente del sistema.")
             return True
 
         except PermissionError:
@@ -65,4 +66,3 @@ class DeleteImage:
         except Exception as e:
             print(f"Error al eliminar la imagen: {str(e)}")
             return False
-        
