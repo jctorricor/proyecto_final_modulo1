@@ -1,7 +1,7 @@
 from data_load.read_images import File
 from crud.agregar import ProcessImage
 from crud.modificar import renombrar_archivo
-
+from crud.eliminar import DeleteImage
 file = File()
 file._data_load()
 #file.show_data()
@@ -32,7 +32,13 @@ while True:
         renombrar_archivo()
             
     elif opcion == 3:
-        print("Selecionaste Opcion 3")
+            print("Seleccionaste Opción 3")
+            
+            d = DeleteImage(file.images)  
+            d.list_images()
+            image_id = input("Ingrese el ID de la imagen a eliminar: ")
+            
+            d.delete(image_id)
     elif opcion == 4:
         file.show_data()
     elif opcion == 0:

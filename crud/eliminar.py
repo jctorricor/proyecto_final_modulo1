@@ -59,4 +59,10 @@ class DeleteImage:
             print(f"Imagen {image_id} eliminada exitosamente del sistema.")
             return True
 
+        except PermissionError:
+            print(f"Error: No se tienen permisos para eliminar el archivo {file_path}.")
+            return False
+        except Exception as e:
+            print(f"Error al eliminar la imagen: {str(e)}")
+            return False
         
