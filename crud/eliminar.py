@@ -1,15 +1,15 @@
 import os
-from typing import Dict, Optional
+from typing import Dict
 
 class DeleteImage:
     """Clase para gestionar la eliminación de imágenes y sus metadatos."""
     
     def __init__(self, images: Dict[str, Dict]):
         """
-        Inicializa el gestor de eliminación con los datos cargados.
+        Inicializa el gestor de eliminación con los datos de las imágenes.
 
         Args:
-            data (Dict[str, Dict]): Diccionario con los datos de las imágenes (ID como clave, metadatos y ruta como valor).
+            images (Dict[str, Dict]): Diccionario con datos de imágenes (ID como clave, metadatos como valor).
         """
         self.images = images
 
