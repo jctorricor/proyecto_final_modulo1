@@ -44,8 +44,7 @@ while True:
         opcion = int(input("Opcion: "))
         if opcion == 1:
             p = ProcessImage()
-            pathfile = p.copiar()
-            print(pathfile)
+            pathfile = p.copiar()            
             procesado = file._data_process(pathfile)
             if procesado:      
                 file._del_file_procesado(pathfile)

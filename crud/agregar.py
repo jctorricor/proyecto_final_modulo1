@@ -17,7 +17,7 @@ class ProcessImage:
                 filepath, filename = os.path.split(origen)   
                 path_filename = os.path.join(destino, filename)
                 shutil.copy(origen, path_filename)
-                print(f"Success Copy: '{origen}' a '{path_filename}'")                
+                print(f"\nSuccess Copy: '{origen}' a '{path_filename}'\n")                
                 return path_filename                 
             except Exception as e:
                 print(f"ERROR en copia: {e}")
