@@ -41,8 +41,7 @@ class File:
                             'path': file_path,
                             'size': os.path.getsize(file_path),
                             'last_modified': os.path.getmtime(file_path)
-                        }
-                        print(file, "File Loaded ")
+                        }                        
                 return True
             
             elif type_recurso == 1:  # Archivo
@@ -53,8 +52,7 @@ class File:
                         'path': path,
                         'size': os.path.getsize(path),
                         'last_modified': os.path.getmtime(path)
-                    }
-                    print(filename, "File Loaded ")
+                    }                    
                     return True
                 return False
             
@@ -62,7 +60,7 @@ class File:
                 return False
                 
         except Exception as e:
-            print("No se pudo leer la ruta especificada: ", path, type_recurso)
+            print("No se pudo leer la imagen: ", path, type_recurso)
             print("\nERROR: ", e, "\n")
             return False
 
@@ -80,34 +78,6 @@ class File:
                 print("RUTA A LEER ARCHIVOS: ", path)
                 self._data_process(path, 2)
     
-    def copy(self, source, destination):
-        """
-        Copia un archivo a la base de imágenes.
-
-        Parameters
-        ----------
-        source: str
-            Ruta del archivo origen.
-        destination: str
-            Ruta de destino.
-
-        Returns
-        -------
-        bool: True si la copia fue exitosa, False si hubo error.
-        """
-        import os        
-        import shutil
-        
-        resultado = False
-        
-        try:
-            shutil.copy(source, destination)
-            resultado = True
-        except Exception as e:
-            print("\nERROR: ", e, "\n")  # Corregido el error de sintaxis
-            return False
-        
-        return resultado
             
     def _del_file_procesado(self, pathfile):
         """
