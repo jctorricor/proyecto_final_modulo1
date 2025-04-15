@@ -72,10 +72,6 @@ while True:
             else:
                 print("No hay archivos cargados")
             
-            input("\nPresione Enter para ver el formato show_data()...")
-            
-            print("\n" + "📊 VISUALIZACIÓN CON SHOW_DATA() ".center(50, '='))
-            file.show_data()
             
         elif opcion == 0:
             print("Seleccionaste Opción 0")
