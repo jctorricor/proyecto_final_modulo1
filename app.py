@@ -61,10 +61,11 @@ while True:
             d.list_images()
             filename = input("Ingrese el nombre del archivo a eliminar (e.g., covid-001.png): ")
             d.delete(filename)
-            recargar_metadatos(file)  # Actualizar metadatos después de eliminar
+            recargar_metadatos(file)
             
         elif opcion == 4:
-            print("\n" + "📄 LISTA SIMPLE DE ARCHIVOS ".center(50, '='))
+            print("Seleccionaste Opcion 4")
+            print("\nLISTA SIMPLE DE ARCHIVOS ".center(50, '='))
             if file.metadata:
                 for i, (filename, data) in enumerate(file.metadata.items(), 1):
                     print(f"{i}. {filename} - {data.get('size', '?')} bytes")
