@@ -2,6 +2,9 @@ import os
 import time
 
 def mostrar_menu_carpetas():
+    """
+    Muestra un menú de selección de carpetas al usuario.
+    """
     print("SELECCIONA CARPETA".center(50, '='))
     print("1. images")
     print("2. nuevo")
@@ -9,17 +12,34 @@ def mostrar_menu_carpetas():
 
 #esta funcion evita que el formato se pierda al renombrar el archivo
 def extension(nombre_archivo):
-    """Extrae la extensión del archivo (incluyendo el punto)"""
+    """
+    Extrae la extensión del archivo (incluyendo el punto) de un nombre de archivo.
+
+    Args:
+        nombre_archivo (str): El nombre del archivo.
+
+    Returns:
+        str: La extensión del archivo, incluyendo el punto (ej: ".txt", ".jpg").  Retorna una cadena vacía si no tiene extensión.
+    """
     return os.path.splitext(nombre_archivo)[1]
 
 def lista_archivos(ruta):
+    """
+    Lista los archivos en una ruta dada.
+
+    Args:
+        ruta (str): La ruta del directorio a listar.
+
+    Returns:
+        list: Una lista de nombres de archivos en la ruta, o None si la ruta no existe o está vacía.
+    """
     try:
         archivos = [f for f in os.listdir(ruta) if os.path.isfile(os.path.join(ruta, f))]
         if not archivos:
-            print("\n⚠️ No hay archivos en esta carpeta")
+            print("\n No hay archivos en esta carpeta")
             return None
         
-        print("\n📋 ARCHIVOS DISPONIBLES:")
+        print("\n ARCHIVOS DISPONIBLES:")
         for i, archivo in enumerate(archivos, 1):
             print(f"{i:>2}. {archivo}")
         return archivos
@@ -28,6 +48,16 @@ def lista_archivos(ruta):
         return None
 
 def renombrar_archivo(file_instance=None):
+    """
+    Permite al usuario seleccionar un archivo de una carpeta específica y renombrarlo.
+
+    Args:
+        file_instance (object, optional): Una instancia de un objeto que contiene metadatos de archivos. Defaults to None.
+                                          Si se proporciona, los metadatos se actualizan después de renombrar el archivo.
+
+    Returns:
+        bool: True si el proceso de renombrado fue exitoso, False si hubo un error o el usuario canceló.
+    """
     # Ruta absoluta garantizada para Windows
     proyecto_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     covid_dir = os.path.normpath(os.path.join(proyecto_dir, "covid"))
@@ -46,7 +76,7 @@ def renombrar_archivo(file_instance=None):
             return True
             
         if opcion not in ["1", "2"]:
-            print("\n❌ Opción no válida")
+            print("\n Opción no válida")
             continue
             
         subcarpeta = "images" if opcion == "1" else "nuevo"
@@ -54,7 +84,7 @@ def renombrar_archivo(file_instance=None):
         
         # Verificación EXTREMA
         if not os.path.exists(target_dir):
-            print(f"\n❌ ERROR: No existe la carpeta: {target_dir}")
+            print(f"\n ERROR: No existe la carpeta: {target_dir}")
             continue
             
         # Listado SEGURO de archivos
@@ -65,10 +95,10 @@ def renombrar_archivo(file_instance=None):
                 archivos.append(f)
         
         if not archivos:
-            print(f"\nℹ️ No hay archivos en {subcarpeta}/")
+            print(f"\n No hay archivos en {subcarpeta}/")
             continue
             
-        print("\n📋 Archivos disponibles:")
+        print("\n Archivos disponibles:")
         for i, archivo in enumerate(archivos, 1):
             print(f"{i}. {archivo}")
             
@@ -79,7 +109,7 @@ def renombrar_archivo(file_instance=None):
                 continue
             archivo_original = archivos[seleccion-1]
         except (ValueError, IndexError):
-            print("\n❌ Selección inválida")
+            print("\n Selección inválida")
             continue
             
         # Proceso de renombrado
@@ -87,7 +117,7 @@ def renombrar_archivo(file_instance=None):
         nuevo_nombre = input("Nuevo nombre (sin extensión): ").strip()
         
         if not nuevo_nombre:
-            print("\n⚠️ El nombre no puede estar vacío")
+            print("\n El nombre no puede estar vacío")
             continue
             
         nuevo_nombre_completo = f"{nuevo_nombre}{ext}"
@@ -97,7 +127,7 @@ def renombrar_archivo(file_instance=None):
         try:
             # 1. Renombrar físicamente
             os.rename(vieja_ruta, nueva_ruta)
-            print(f"\n✅ Archivo renombrado: {archivo_original} → {nuevo_nombre_completo}")
+            print(f"\n Archivo renombrado: {archivo_original} → {nuevo_nombre_completo}")
             
             # 2. Actualización OBLIGATORIA de metadata
             if file_instance:
@@ -119,7 +149,7 @@ def renombrar_archivo(file_instance=None):
                     'size': os.path.getsize(nueva_ruta),
                     'last_modified': os.path.getmtime(nueva_ruta)
                 }
-                print("♻️ Metadata actualizada CORRECTAMENTE")
+                print(" Metadata actualizada CORRECTAMENTE")
             
             # 3. Verificación INMEDIATA
             print("\n🔥 VERIFICACIÓN:")
@@ -130,7 +160,7 @@ def renombrar_archivo(file_instance=None):
             return True
             
         except Exception as e:
-            print(f"\n❌ Error al renombrar: {str(e)}")
+            print(f"\n Error al renombrar: {str(e)}")
             return False
 
 if __name__ == "__main__":

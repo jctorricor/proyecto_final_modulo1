@@ -35,7 +35,56 @@ Características
     Notificacion del cambio de nombre del archivo
     Preserva extensiones de archivo automáticamente (.jpg, .png)
     Uso de la Biblioteca OS nativa de Python para renombrar el archivo 
+# Módulo agregar.py
+Descripción General:
+agregar.py es uno de los tres módulos esenciales (Agregar, Modificar y Eliminar) diseñados para la gestión de imágenes médicas relacionadas con COVID-19, así como la incorporación de nuevas imágenes. Su función principal es facilitar la copia de imágenes desde una ubicación especificada por el usuario a un directorio designado dentro del proyecto, preparándolas para su posterior análisis o procesamiento.
 
+Características:
+1. Enfoque Específico: Este módulo se concentra en la copia de archivos de imagen a un directorio específico: /covid/nuevo/.
+         Compatibilidad de Formatos: Acepta diversos formatos de imagen comunes (.jpg, .png, .dicom, etc.) sin realizar conversiones, preservando la integridad de los datos originales.
+         Interfaz: Opera mediante una interfaz de línea de comandos (consola) para solicitar la ruta de origen de la imagen.
+
+2. Diseño Técnico:
+        Se ha adoptado una arquitectura modular que permite:
+            Utilización independiente como script.
+            Integración fluida con los otros módulos del proyecto.
+        Operaciones Seguras: Implementa la copia de archivos de forma robusta, minimizando el riesgo de corrupción de datos.
+        Clase ProcessImage: Encapsula la lógica de copia de imágenes.
+
+3. Flujo del Módulo:
+    Solicitud al usuario de la ruta de la imagen a copiar.
+    Validación de la ruta ingresada.
+    Copia de la imagen al directorio /covid/nuevo/.
+    Notificación al usuario del resultado de la operación (éxito o error).
+    Manejo de excepciones para informar errores durante la copia.
+    Uso de Bibliotecas:
+    Utiliza los módulos os y shutil de la biblioteca estándar de Python para operaciones de manipulación de archivos y directorios, incluyendo la copia de archivos.
+    eliminar.py
+
+# Módulo eliminar.py
+Descripción General:
+eliminar.py es un componente clave dentro del conjunto de herramientas (Agregar, Modificar y Eliminar) para la gestión de imágenes médicas, con un enfoque especial en imágenes relacionadas con COVID-19. Su propósito principal es permitir la eliminación segura de imágenes y sus metadatos asociados del sistema.
+
+Características:
+1. Enfoque Específico: Diseñado para operar sobre archivos de imagen ubicados en los directorios /covid/images/ o /covid/nuevo/ (dependiendo de la configuración del proyecto).
+         Eliminación Controlada: Requiere confirmación del usuario antes de eliminar un archivo para prevenir eliminaciones accidentales.
+         Gestión de Metadatos: Elimina tanto el archivo de imagen físico como su entrada correspondiente en la base de datos de metadatos.
+2. Diseño Técnico:
+        Se implementó una arquitectura modular para:
+            Facilitar el uso independiente del script.
+            Permitir una integración sencilla con los otros componentes del sistema.
+        Clase DeleteImage: Encapsula la lógica para la eliminación de imágenes y sus metadatos.
+        Manejo de Errores: Incorpora manejo de excepciones para gestionar situaciones como archivos no encontrados o problemas de permisos.
+3. Flujo del Módulo:
+    Presentación de una lista de imágenes disponibles (basada en los metadatos).
+    Solicitud al usuario del nombre del archivo a eliminar.
+    Confirmación del usuario para proceder con la eliminación.
+    Eliminación del archivo físico del sistema.
+    Eliminación de la entrada correspondiente en la base de datos de metadatos.
+    Notificación al usuario del resultado de la operación (éxito o error).
+    Uso de Bibliotecas:
+    Utiliza el módulo os de la biblioteca estándar de Python para interactuar con el sistema de archivos, incluyendo la eliminación de archivos.
+    Utiliza el módulo typing para el tipado de datos.
 
 # Instalacion del Proyecto
 
