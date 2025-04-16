@@ -10,10 +10,60 @@ if not hasattr(file, 'metadata'):
     file.metadata = {}
 
 def recargar_metadatos(file_instance):
+    """
+    Reinicia y vuelve a cargar los metadatos para una instancia dada.
+
+    Primero, vacía el diccionario `metadata` de la `file_instance` proporcionada.
+    Luego, llama a la función `cargar_archivos()` para escanear los
+    directorios predefinidos ('covid/images', 'covid/nuevo') y poblar
+    nuevamente los metadatos.
+
+    Advertencia:
+        Esta función asume que `cargar_archivos()` modificará los metadatos
+        de una instancia específica (posiblemente una instancia global `file`
+        a la que `cargar_archivos` tiene acceso), que puede o no ser la
+        misma `file_instance` pasada como argumento, dependiendo de cómo
+        esté definida `cargar_archivos` y la variable `file` que usa.
+        Actualmente, `cargar_archivos` parece modificar una variable `file`
+        accesible globalmente.
+
+    Parameters
+    ----------
+    file_instance : object
+        Una instancia de una clase (presumiblemente la clase `File` o similar)
+        que tiene un atributo `metadata` (un diccionario) que será limpiado.
+    """
     file_instance.metadata = {}  # Limpiar metadatos existentes
     cargar_archivos()
 
 def cargar_archivos():
+    """
+    Escanea directorios específicos y carga metadatos de archivos en una instancia `file`.
+
+    Busca los subdirectorios 'images' y 'nuevo' dentro de un directorio 'covid'
+    ubicado junto al script actual (`__file__`). Para cada archivo encontrado
+    dentro de estos subdirectorios, extrae sus metadatos (nombre, ruta completa,
+    tamaño y fecha de última modificación) y los almacena en el diccionario
+    `metadata` de una variable predefinida llamada `file`.
+
+    Notas:
+        - Esta función depende de la existencia de una variable llamada `file`
+          en el ámbito donde se llama, y que esta variable tenga un atributo
+          `metadata` (un diccionario). Modifica directamente `file.metadata`.
+        - La ruta base se calcula relativa a la ubicación del archivo de script
+          que contiene esta función.
+        - Los directorios buscados son estrictamente `covid/images` y `covid/nuevo`.
+        - No devuelve ningún valor (`None`).
+
+    Side Effects:
+        - Modifica el contenido del atributo `file.metadata`.
+
+    Raises:
+        - Potencialmente `FileNotFoundError` si `__file__` no está definido
+          correctamente (poco común en scripts normales).
+        - Potencialmente `OSError` si hay problemas de permisos al listar
+          directorios o acceder a archivos.
+    """
     base_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "covid"))
     for folder in ["images", "nuevo"]:
         folder_path = os.path.join(base_path, folder)

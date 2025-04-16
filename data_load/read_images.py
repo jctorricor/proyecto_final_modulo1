@@ -1,33 +1,84 @@
 class File:
-    
+    """
+    Gestiona la información (metadatos) sobre archivos dentro de una estructura
+    de proyecto específica.
+
+    Permite cargar metadatos de archivos existentes en directorios predefinidos,
+    procesar nuevos archivos o directorios para extraer sus metadatos, mover
+    archivos entre estados (ej. 'nuevo' a 'procesado') y mostrar los
+    metadatos recopilados.
+
+    Atributos:
+        images (dict): Mantenido por posible compatibilidad, pero actualmente no utilizado
+                       en la lógica principal.
+        metadata (dict): Diccionario que almacena los metadatos de los archivos.
+                         Las claves son los nombres de archivo (basename) y los
+                         valores son diccionarios con detalles como 'path', 'size',
+                         'last_modified'.
+    """
+
     def __init__(self):
         """
-        Constructor de la clase File, inicializa los diccionarios images y metadata.
+        Constructor de la clase File.
+
+        Inicializa el diccionario `self.metadata` vacío, que se usará para
+        almacenar los metadatos de los archivos procesados. También inicializa
+        `self.images`, aunque no se utiliza activamente en los métodos actuales.
         """
         self.images = {}  # Mantener por compatibilidad, pero no se usa
         self.metadata = {}  # Inicializar metadata
     
     def _get_config_path(self):
         """
-        Obtiene el directorio de trabajo actual.
+        Obtiene la ruta absoluta del directorio de trabajo actual.
+
+        Se utiliza internamente como base para construir rutas a los subdirectorios
+        específicos del proyecto (ej. 'covid/images', 'covid/nuevo').
+
+        Nota:
+            El prefijo '_' indica que este método está destinado a uso interno
+            dentro de la clase.
+
+        Returns:
+            str: La ruta absoluta del directorio de trabajo actual.
         """
+       
         import os 
         return os.getcwd()
 
     def _data_process(self, path, type_recurso=1):
         """
-        Procesa archivos o directorios y actualiza los metadatos.
+        Procesa un archivo individual o todos los archivos dentro de un directorio
+        y extrae sus metadatos, actualizando el diccionario `self.metadata`.
+
+        Si `type_recurso` es 1, procesa el archivo especificado en `path`.
+        Si `type_recurso` es 2, itera sobre todos los archivos dentro del
+        directorio `path` y procesa cada uno.
+
+        Los metadatos almacenados para cada archivo incluyen:
+        'filename': Nombre base del archivo.
+        'path': Ruta completa al archivo.
+        'size': Tamaño del archivo en bytes.
+        'last_modified': Marca de tiempo (timestamp) de la última modificación.
+
+        Nota:
+            El prefijo '_' indica que este método está destinado a uso interno
+            dentro de la clase.
 
         Parameters
         ----------
-        path: str
+        path : str
             Ruta al archivo o directorio a procesar.
-        type_recurso: int
+        type_recurso : int, opcional
             Tipo de recurso a procesar (1: archivo, 2: directorio).
+            Por defecto es 1.
 
         Returns
         -------
-        bool: True si el procesamiento fue exitoso, False si hubo error.
+        bool
+            True si el procesamiento fue exitoso (o parcialmente exitoso en caso
+            de directorios), False si se proporcionó un `type_recurso` inválido
+            o si ocurrió una excepción durante la lectura de metadatos.
         """
         import os
 
@@ -66,7 +117,17 @@ class File:
 
     def _data_load(self):
         """
-        Carga los datos iniciales de las imágenes desde covid/images y covid/nuevo.
+        Carga los metadatos iniciales de los archivos encontrados en los
+        directorios predefinidos 'covid/images' y 'covid/nuevo'.
+
+        Construye las rutas a estos directorios basándose en el directorio de
+        trabajo actual obtenido con `_get_config_path()`. Llama a `_data_process()`
+        para cada directorio encontrado para poblar `self.metadata`.
+
+        Nota:
+            El prefijo '_' indica que este método está destinado a uso interno
+            dentro de la clase. Debería llamarse típicamente después de
+            instanciar la clase para cargar el estado inicial.
         """
         import os
         
@@ -81,12 +142,24 @@ class File:
             
     def _del_file_procesado(self, pathfile):
         """
-        Copia un archivo a covid/images y elimina el original.
+        Mueve un archivo desde su ubicación original (presumiblemente un
+        directorio de 'nuevos' o 'pendientes') al directorio 'covid/images'
+        y elimina el archivo original.
+
+        Después de mover el archivo, actualiza los metadatos llamando a
+        `_data_process` sobre el directorio 'covid/images' para reflejar
+        el archivo movido y potencialmente actualizar su información si cambió
+        durante la copia (aunque `copy2` intenta preservar metadatos).
+
+        Nota:
+            El prefijo '_' indica que este método está destinado a uso interno
+            dentro de la clase. El nombre "_del_file_procesado" es ligeramente
+            engañoso, ya que la acción principal es *mover* (copiar y luego borrar).
 
         Parameters
         ----------
-        pathfile: str
-            Ruta del archivo a procesar.
+        pathfile : str
+            Ruta completa del archivo original que se va a mover.
         """
         import os
         import shutil
@@ -104,7 +177,13 @@ class File:
 
     def show_data(self):
         """
-        Muestra los datos de los metadatos de las imágenes.
+        Muestra en la consola los metadatos de los archivos almacenados
+        en el diccionario `self.metadata`.
+
+        Itera sobre el diccionario `self.metadata` e imprime la información
+        clave de cada archivo (nombre, ruta, tamaño, fecha de modificación).
+        Si no hay metadatos cargados, imprime un mensaje indicándolo.
+        Formatea la fecha de modificación para que sea más legible.
         """
         try:
             if not self.metadata:
