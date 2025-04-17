@@ -97,7 +97,8 @@ Para instalar el proyecto se debe seguir los siguientes pasos:
    Instalar git desde el sitio oficial de git [Git](https://git-scm.com/downloads)
 
 3. Clonacion del Proyecto
-  $git clone https://github.com/jctorricor/proyecto_final_modulo1.git
+
+  $ git clone https://github.com/jctorricor/proyecto_final_modulo1.git
 
 4. Ejecucion 
    La ejecion de sistema se lo debe realizar una vez clonado el proyecto e ingresando dentro del directorio que contiene el proyecto por ejemplo proyecto_final_modulo1 ahi dentro ejecutar:
@@ -146,4 +147,6 @@ Para instalar el proyecto se debe seguir los siguientes pasos:
       COVID-500.png File Loaded 
    
 
+#Documentacion del Proyecto
 
+[Documentacion](https://github.com/jctorricor/documentation/blob/main/html/index.html)
