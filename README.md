@@ -4,9 +4,9 @@ Proyecto Final del Modulo I - Maestria en Ciencia de Datos e Inteligencia Artifi
 
 # Estudiantes:
 
-1. ## Juan Carlos Torrico Rios
-2. ## Carlos Marcelo Cruz Cruz
-3. ## Juan Carlos Vela Yucra
+## 1. Juan Carlos Torrico Rios
+## 2. Carlos Marcelo Cruz Cruz
+## 3. Juan Carlos Vela Yucra
 
 # Diagrama de paquetes
 ![Diagrama de Paquetes](https://drive.google.com/uc?export=view&id=1tD_UTnKBhfv1WXCMjrgrgXEwIWTuh1uL)
