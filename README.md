@@ -214,9 +214,7 @@ La documentacion fue generada con  Sphinx y publicada dentro de paginas de Githu
 # Video Presentacion
 
 A continuacion el video de presentacion del Proyecto Final del Modulo I
+[Video de Presentacion](https://drive.google.com/drive/folders/1E46dBpu99Lusl0U_alN17ac_9XRfvrhK?usp=sharing)
 
-<div align="center">
-  <img src="https://drive.google.com/drive/folders/1E46dBpu99Lusl0U_alN17ac_9XRfvrhK?usp=sharing" alt="Video de Presentacion" width="500"/>
-</div>
 
 
