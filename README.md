@@ -110,7 +110,7 @@ Para instalar el proyecto se debe seguir los siguientes pasos:
    El comando anterior iniciara la aplicación desplegando un menú con 5 opciones las cuales se inician usando el teclado y los números respectivos
 
 <div align="center">
-  <img src="https://drive.google.com/uc?export=view&id=1TkKL-RtxsJZ4BiWNaJUszR2SYE8AxEyU" alt="Texto alternativo" width="300"/>
+  <img src="https://drive.google.com/uc?export=view&id=1TkKL-RtxsJZ4BiWNaJUszR2SYE8AxEyU" alt="Menu de sistema" width="500"/>
 </div>
 
 
