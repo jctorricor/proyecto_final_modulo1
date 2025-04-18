@@ -147,6 +147,6 @@ Para instalar el proyecto se debe seguir los siguientes pasos:
       COVID-500.png File Loaded 
    
 
-#Documentacion del Proyecto
+# Documentacion del Proyecto
 
 [Documentacion](https://jctorricor.github.io/documentation/index.html)
