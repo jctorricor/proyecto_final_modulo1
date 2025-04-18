@@ -15,6 +15,14 @@ Proyecto Final del Modulo I - Maestria en Ciencia de Datos e Inteligencia Artifi
 
 ![Radiografia COVID-1.png](https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-1.png)![Radiografia COVID-50.png](https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-50.png)![Radiografia COVID-60.png](https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-60.png)![Radiografia COVID-90.png](https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-90.png)
 
+
+<div align="center">
+  <img src="https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-1.png" alt="Menu de sistema" width="100"/>
+  <img src="https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-45.png" alt="Menu de sistema" width="100"/>
+  <img src="https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-60.png" alt="Menu de sistema" width="100"/>
+  <img src="https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-90.png" alt="Menu de sistema" width="100"/>
+</div>
+
 # Módulo modificar.py
 Descripción General
 modificar.py es un modulo de los 3 requeridos para el proyecto (Agregar, Modificar y eliminar) enfocado en las imágenes médicas COVID-19 y las imagenes nuevas que puedan ser agregadas. Su función principal consiste en renombrar la imagen seleccionada sin alterar su formato.
