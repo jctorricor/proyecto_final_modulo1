@@ -12,8 +12,9 @@ Proyecto Final del Modulo I - Maestria en Ciencia de Datos e Inteligencia Artifi
 
 ![Diagrama de Paquetes](https://drive.google.com/uc?export=view&id=1tD_UTnKBhfv1WXCMjrgrgXEwIWTuh1uL)
 
-# Dataset utilizado - [COVID-19 Radiograpy Database](https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database) 
+# Dataset utilizado -  
 
+El proyecto esta diseñado para manejar datos relacionados con COVID, posiblemente imágenes (como radiografías o gráficos) que se obtuvieron de la siguiente direccion de kaggle [COVID-19 Radiograpy Database](https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database)
 
 <div align="center">
   <img src="https://github.com/jctorricor/proyecto_final_modulo1/blob/main/covid/images/COVID-1.png" alt="Menu de sistema" width="250"/>
