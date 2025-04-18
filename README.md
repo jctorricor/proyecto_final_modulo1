@@ -12,7 +12,7 @@ Proyecto Final del Modulo I - Maestria en Ciencia de Datos e Inteligencia Artifi
 
 ![Diagrama de Paquetes](https://drive.google.com/uc?export=view&id=1tD_UTnKBhfv1WXCMjrgrgXEwIWTuh1uL)
 
-# Dataset utilizado -  
+# Dataset utilizado  
 
 El proyecto esta diseñado para manejar datos relacionados con COVID, posiblemente imágenes (como radiografías o gráficos) que se obtuvieron de la siguiente direccion de kaggle [COVID-19 Radiograpy Database](https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database)
 
@@ -32,26 +32,26 @@ modificar.py es un modulo de los 3 requeridos para el proyecto (Agregar, Modific
 
 ## Características
 ### 1. Enfoque Específico
-        Opera exclusivamente sobre archivos de imagen en los directorios:
-        /covid/images/
-        /covid/nuevo/
-        Mantiene intactos los formatos originales (.jpg, .png, .dicom, etc.)
+Opera exclusivamente sobre archivos de imagen en los directorios:
+/covid/images/
+/covid/nuevo/
+Mantiene intactos los formatos originales (.jpg, .png, .dicom, etc.)
 
 ### 2. Diseño Técnico
-        La interfaz trabaja por consola 
-        Se aplico la arquitectura de tipo modular que permite:
-            Uso independiente como script
-            Integración con los otros componentes
-        Persistencia segura: Operaciones atómicas que no corrompen archivos
+La interfaz trabaja por consola 
+Se aplico la arquitectura de tipo modular que permite:
+    Uso independiente como script
+    Integración con los otros componentes
+Persistencia segura: Operaciones atómicas que no corrompen archivos
 
 ### 3. Flujo del Modulo
-    Seleccionar la carpeta donde modificara el nombre
-    Se desplegara una lista con los archivos disponibles
-    Seleccion del archivo especifico
-    Confirmación de cambio de nombre del archivo
-    Notificacion del cambio de nombre del archivo
-    Preserva extensiones de archivo automáticamente (.jpg, .png)
-    Uso de la Biblioteca OS nativa de Python para renombrar el archivo 
+Seleccionar la carpeta donde modificara el nombre
+Se desplegara una lista con los archivos disponibles
+Seleccion del archivo especifico
+Confirmación de cambio de nombre del archivo
+Notificacion del cambio de nombre del archivo
+Preserva extensiones de archivo automáticamente (.jpg, .png)
+Uso de la Biblioteca OS nativa de Python para renombrar el archivo 
 
 # Módulo agregar.py
 ## Descripción General:
@@ -59,26 +59,26 @@ agregar.py es uno de los tres módulos esenciales (Agregar, Modificar y Eliminar
 
 ## Características:
 ### 1. Enfoque Específico: 
-         Este módulo se concentra en la copia de archivos de imagen a un directorio específico: /covid/nuevo/.
-         Compatibilidad de Formatos: Acepta diversos formatos de imagen comunes (.jpg, .png, .dicom, etc.) sin realizar conversiones, preservando la integridad de los datos originales.
-         Interfaz: Opera mediante una interfaz de línea de comandos (consola) para solicitar la ruta de origen de la imagen.
+Este módulo se concentra en la copia de archivos de imagen a un directorio específico: /covid/nuevo/.
+Compatibilidad de Formatos: Acepta diversos formatos de imagen comunes (.jpg, .png, .dicom, etc.) sin realizar conversiones, preservando la integridad de los datos originales.
+Interfaz: Opera mediante una interfaz de línea de comandos (consola) para solicitar la ruta de origen de la imagen.
 
 ### 2. Diseño Técnico:
-        Se ha adoptado una arquitectura modular que permite:
-            Utilización independiente como script.
-            Integración fluida con los otros módulos del proyecto.
-        Operaciones Seguras: Implementa la copia de archivos de forma robusta, minimizando el riesgo de corrupción de datos.
-        Clase ProcessImage: Encapsula la lógica de copia de imágenes.
+Se ha adoptado una arquitectura modular que permite:
+    Utilización independiente como script.
+    Integración fluida con los otros módulos del proyecto.
+Operaciones Seguras: Implementa la copia de archivos de forma robusta, minimizando el riesgo de corrupción de datos.
+Clase ProcessImage: Encapsula la lógica de copia de imágenes.
 
 ### 3. Flujo del Módulo:
-    Solicitud al usuario de la ruta de la imagen a copiar.
-    Validación de la ruta ingresada.
-    Copia de la imagen al directorio /covid/nuevo/.
-    Notificación al usuario del resultado de la operación (éxito o error).
-    Manejo de excepciones para informar errores durante la copia.
-    Uso de Bibliotecas:
-    Utiliza los módulos os y shutil de la biblioteca estándar de Python para operaciones de manipulación de archivos y directorios, incluyendo la copia de archivos.
-    eliminar.py
+Solicitud al usuario de la ruta de la imagen a copiar.
+Validación de la ruta ingresada.
+Copia de la imagen al directorio /covid/nuevo/.
+Notificación al usuario del resultado de la operación (éxito o error).
+Manejo de excepciones para informar errores durante la copia.
+Uso de Bibliotecas:
+Utiliza los módulos os y shutil de la biblioteca estándar de Python para operaciones de manipulación de archivos y directorios, incluyendo la copia de archivos.
+eliminar.py
 
 # Módulo eliminar.py
 ## Descripción General:
@@ -87,44 +87,44 @@ eliminar.py es un componente clave dentro del conjunto de herramientas (Agregar,
 
 ## Características:
 ### 1. Enfoque Específico: 
-         Diseñado para operar sobre archivos de imagen ubicados en los directorios /covid/images/ o /covid/nuevo/ (dependiendo de la configuración del proyecto).
-         Eliminación Controlada: Requiere confirmación del usuario antes de eliminar un archivo para prevenir eliminaciones accidentales.
-         Gestión de Metadatos: Elimina tanto el archivo de imagen físico como su entrada correspondiente en la base de datos de metadatos.
+Diseñado para operar sobre archivos de imagen ubicados en los directorios /covid/images/ o /covid/nuevo/ (dependiendo de la configuración del proyecto).
+Eliminación Controlada: Requiere confirmación del usuario antes de eliminar un archivo para prevenir eliminaciones accidentales.
+Gestión de Metadatos: Elimina tanto el archivo de imagen físico como su entrada correspondiente en la base de datos de metadatos.
 ### 2. Diseño Técnico:
-        Se implementó una arquitectura modular para:
-            Facilitar el uso independiente del script.
-            Permitir una integración sencilla con los otros componentes del sistema.
-        Clase DeleteImage: Encapsula la lógica para la eliminación de imágenes y sus metadatos.
-        Manejo de Errores: Incorpora manejo de excepciones para gestionar situaciones como archivos no encontrados o problemas de permisos.
+Se implementó una arquitectura modular para:
+    Facilitar el uso independiente del script.
+    Permitir una integración sencilla con los otros componentes del sistema.
+Clase DeleteImage: Encapsula la lógica para la eliminación de imágenes y sus metadatos.
+Manejo de Errores: Incorpora manejo de excepciones para gestionar situaciones como archivos no encontrados o problemas de permisos.
 ### 3. Flujo del Módulo:
-    Presentación de una lista de imágenes disponibles (basada en los metadatos).
-    Solicitud al usuario del nombre del archivo a eliminar.
-    Confirmación del usuario para proceder con la eliminación.
-    Eliminación del archivo físico del sistema.
-    Eliminación de la entrada correspondiente en la base de datos de metadatos.
-    Notificación al usuario del resultado de la operación (éxito o error).
-    Uso de Bibliotecas:
-    Utiliza el módulo os de la biblioteca estándar de Python para interactuar con el sistema de archivos, incluyendo la eliminación de archivos.
-    Utiliza el módulo typing para el tipado de datos.
+Presentación de una lista de imágenes disponibles (basada en los metadatos).
+Solicitud al usuario del nombre del archivo a eliminar.
+Confirmación del usuario para proceder con la eliminación.
+Eliminación del archivo físico del sistema.
+Eliminación de la entrada correspondiente en la base de datos de metadatos.
+Notificación al usuario del resultado de la operación (éxito o error).
+Uso de Bibliotecas:
+Utiliza el módulo os de la biblioteca estándar de Python para interactuar con el sistema de archivos, incluyendo la eliminación de archivos.
+Utiliza el módulo typing para el tipado de datos.
 
 # Instalacion del Proyecto
 
 Para instalar el proyecto se debe seguir los siguientes pasos:
 
 ## 1. Instalacion de Python
-   Instalar Python desde el sitio oficial de [Python](https://www.python.org/downloads/)
+Instalar Python desde el sitio oficial de [Python](https://www.python.org/downloads/)
 
 ## 2. Instalacion de git  
-   Instalar git desde el sitio oficial de git [Git](https://git-scm.com/downloads)
+Instalar git desde el sitio oficial de git [Git](https://git-scm.com/downloads)
 
 ## 3. Clonacion del Proyecto
 
-  $ git clone https://github.com/jctorricor/proyecto_final_modulo1.git
+$ git clone https://github.com/jctorricor/proyecto_final_modulo1.git
 
 ## 4. Ejecucion 
-   La ejecion de sistema se lo debe realizar una vez clonado el proyecto e ingresando dentro del directorio que contiene el proyecto por ejemplo proyecto_final_modulo1 ahi dentro ejecutar:
-   
-   $ python init.py
+La ejecion de sistema se lo debe realizar una vez clonado el proyecto e ingresando dentro del directorio que contiene el proyecto por ejemplo proyecto_final_modulo1 ahi dentro ejecutar:
+
+$ python init.py
 
 
 # Utilizacion del Proyecto
