@@ -107,46 +107,10 @@ Para instalar el proyecto se debe seguir los siguientes pasos:
 
 
 # Utilizacion del Proyecto
-   En este punto se describe como podria utilizar el software implementado para la gestion de radiografias de COVID-19 para lo cual se describen las funcionalidades:
+   El comando anterior iniciara la aplicación desplegando un menú con 5 opciones las cuales se inician usando el teclado y los números respectivos
 
-1. Menu inicial
+   ![Diagrama de Paquetes](https://drive.google.com/uc?export=view&id=1TkKL-RtxsJZ4BiWNaJUszR2SYE8AxEyU)
 
-   Al ejecutar el sistema muestra un menu donde el usuario podria seleccionar una de las siguientes opciones:
-   1. Agregar 
-   2. Modificar
-   3. Eliminar
-   4. Mostrar
-   5. Salir
 
-   A continucacion describiremos uno a uno las opciones del menu:
-   1. Agregar 
-   
-      Permite agregar una nueva imagen a la base de datos de COVID-19 donde el usuario envia la direccion de la imagen a cargar como se muestra en el siguiente ejemplo:
-
-      ------------------------------------------------------
-
-      Gestionar imagenes de COVID-19 Radiography Database:
-
-          1: Agregar nueva imagen
-          2: Modificar imagen
-          3: Eliminar imagen
-          4: Mostrar imagenes cargadas
-          0: Salir
-
-      ------------------------------------------------------
-      Opcion: 1
-
-      Presione 0 para salir
-
-      Ingrese la ruta de la imagen a subir: /home/juancarlos/test_images/COVID-500.png
-
-      Una vez proporcionado la ruta absoluta de la imagen el sistema proceso de cargar los metadatos de la imagen en nuestra base de datos y asi como tambien se realiza una copia del archivo hacia la ruta definida dentro del sistema como salida el sistema muestra el siguiente mensaje en caso de exito.
-
-      SUCCESS COPY: '/home/juancarlos/test_images/COVID-500.png' a '/home/juancarlos/proyecto_final_modulo1/covid/nuevo'
-      /home/juancarlos/proyecto_final_modulo1/covid/nuevo/COVID-500.png
-      COVID-500.png File Loaded 
-   
-
-# Documentacion del Proyecto
-
-[Documentacion](https://jctorricor.github.io/documentation/index.html)
+# Documentacion de Codigo del Proyecto
+La documentacion fue genera con  Sphinx y publicadas dentro de paginas de Github donde podra ver en el siguiente enlace: [Documentacion](https://jctorricor.github.io/documentation/index.html)
