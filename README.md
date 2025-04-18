@@ -109,11 +109,69 @@ Para instalar el proyecto se debe seguir los siguientes pasos:
 # Utilizacion del Proyecto
    El comando anterior iniciara la aplicación desplegando un menú con 5 opciones las cuales se inician usando el teclado y los números respectivos
 
+## Menu
 <div align="center">
   <img src="https://drive.google.com/uc?export=view&id=1TkKL-RtxsJZ4BiWNaJUszR2SYE8AxEyU" alt="Menu de sistema" width="500"/>
+</div>
+
+## Agregar nueva imagen
+Para que el usuario agregue una nueva imagen debera seleccionar la opcion 1 misma que iniciara solicitando la ruta donde se encuentra la imagen que se desea agregar
+
+<div align="center">
+  <img src="https://drive.google.com/uc?export=view&id=1F2-AQ6HHrWsWJU4ljwQDYeTwFMM-rKT5" alt="Menu de sistema" width="500"/>
+</div>
+
+Una vez que el usuario agregue la ruta de la imagen seleccionada se imprimirá un mensaje de copia exitosa donde las imágenes nuevas serán almacenadas en la dirección especificada asimismo la biblioteca de datos se actualizará automáticamente.
+
+<div align="center">
+  <img src="https://drive.google.com/uc?export=view&id=1JtZ4d9rYEhyTsJ5GXvwhBuoKnt2aOX3E" alt="Menu de sistema" width="500"/>
+</div>
+
+## Modificar imagen
+En caso de que el usuario desee modificar el nombre de algún archivo dentro de la biblioteca de datos, este deberá activarlo con la opción 2, el cual desplegara un menú con las carpetas donde se almacenan las imágenes ya sean las predeterminadas o imágenes nuevas para el programa.
+
+<div align="center">
+  <img src="https://drive.google.com/uc?export=view&id=1kUhaqw26y_sOaK3h98ffI54g8xeLxaov" alt="Menu de sistema" width="500"/>
+</div>
+
+Indistintamente del archivo que el usuario elija el software desplegara una lista con los archivo dentro de la carpeta donde debe seleccionar por el numero en la lista el archivo que desea renombrar.
+
+
+<div align="center">
+  <img src="https://drive.google.com/uc?export=view&id=1AWFZQSXroSyB71i7Y2at4SZGj7IFUQnK" alt="Menu de sistema" width="500"/>
+</div>
+
+El usuario una vez renombre la imagen se enviará la actualización de la imagen asimismo un mensaje de verificación de actualización, además de retornar al menú principal.
+
+<div align="center">
+  <img src="https://drive.google.com/uc?export=view&id=1_olvsFPNk6LND35_EFynuQ7RwxgMz-hF" alt="Menu de sistema" width="500"/>
+</div>
+
+
+## Elimnar imagen
+
+El usuario podrá eliminar archivos de la aplicación seleccionando la opción 3 el cual desplegará el listado con la ubicación de los archivos de forma ordenada, asimismo el usuario deberá escribir nombre del archivo respetando mayúsculas y minúsculas además de la extensión del archivo por seguridad.
+
+<div align="center">
+  <img src="https://drive.google.com/uc?export=view&id=1YDOXQUc5JB7hQ-C1oJ-_woRGYvkIo8xK" alt="Menu de sistema" width="500"/>
+</div>
+
+Una vez el usuario escriba el archivo que desea eliminar, la aplicación enviara un mensaje de confirmación para el usuario procurando prevenir eliminaciones no deseadas y posteriormente su confirmación de eliminación de archivo asimismo se desplegara el menú inicial para que el usuario continue con su navegación del software.
+
+<div align="center">
+  <img src="https://drive.google.com/uc?export=view&id=1D0wyGgtGSMRm5XOgtDB9kNUuGN4MbcCK" alt="Menu de sistema" width="500"/>
+</div>
+
+## Mostrar imágenes cargadas
+
+En caso de que el usuario desee visualizar los archivos ya sean visibles, actualizados o verificar la eliminación de los archivos, el usuario deberá seleccionar la opción 4 el cual desplegara automáticamente el listado general de los documentos almacenados en la aplicación.
+
+
+<div align="center">
+  <img src="https://drive.google.com/uc?export=view&id=1jMGNLNFyDZpX_4EEP9y_oJdH5w0oo-dw" alt="Menu de sistema" width="500"/>
 </div>
 
 
 
 # Documentacion de Codigo del Proyecto
-La documentacion fue genera con  Sphinx y publicadas dentro de paginas de Github donde podra ver en el siguiente enlace: [Documentacion](https://jctorricor.github.io/documentation/index.html)
+La documentacion fue generada con  Sphinx y publicada dentro de paginas de Github donde podra ver en: [Documentacion](https://jctorricor.github.io/documentation/index.html)
