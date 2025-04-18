@@ -109,8 +109,9 @@ Para instalar el proyecto se debe seguir los siguientes pasos:
 # Utilizacion del Proyecto
    El comando anterior iniciara la aplicación desplegando un menú con 5 opciones las cuales se inician usando el teclado y los números respectivos
 
+<center>
    ![Diagrama de Paquetes](https://drive.google.com/uc?export=view&id=1TkKL-RtxsJZ4BiWNaJUszR2SYE8AxEyU)
-
+</center>
 
 # Documentacion de Codigo del Proyecto
 La documentacion fue genera con  Sphinx y publicadas dentro de paginas de Github donde podra ver en el siguiente enlace: [Documentacion](https://jctorricor.github.io/documentation/index.html)
