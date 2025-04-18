@@ -149,4 +149,4 @@ Para instalar el proyecto se debe seguir los siguientes pasos:
 
 #Documentacion del Proyecto
 
-[Documentacion](https://github.com/jctorricor/documentation/blob/main/html/index.html)
+[Documentacion](https://jctorricor.github.io/documentation/index.html)
