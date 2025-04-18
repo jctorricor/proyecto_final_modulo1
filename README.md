@@ -2,6 +2,12 @@
 # Docente: Msc. Edwin Salcedo
 Proyecto Final del Modulo I - Maestria en Ciencia de Datos e Inteligencia Artificial
 
+# Estudiantes:
+
+1. Juan Carlos Torrico Rios
+2. Carlos Marcelo Cruz Cruz
+3. Juan Carlos Vela Yucra
+
 # Diagrama de paquetes
 ![Diagrama de Paquetes](https://drive.google.com/uc?export=view&id=1tD_UTnKBhfv1WXCMjrgrgXEwIWTuh1uL)
 
@@ -107,14 +113,17 @@ Para instalar el proyecto se debe seguir los siguientes pasos:
 
 
 # Utilizacion del Proyecto
-   El comando anterior iniciara la aplicación desplegando un menú con 5 opciones las cuales se inician usando el teclado y los números respectivos
+
+El comando  "**python init.py**" iniciara la aplicación desplegando un menú con 5 opciones las cuales se inician usando el teclado y los números respectivos
 
 ## Menu
+
 <div align="center">
   <img src="https://drive.google.com/uc?export=view&id=1TkKL-RtxsJZ4BiWNaJUszR2SYE8AxEyU" alt="Menu de sistema" width="500"/>
 </div>
 
 ## Agregar nueva imagen
+
 Para que el usuario agregue una nueva imagen debera seleccionar la opcion 1 misma que iniciara solicitando la ruta donde se encuentra la imagen que se desea agregar
 
 <div align="center">
@@ -128,7 +137,9 @@ Una vez que el usuario agregue la ruta de la imagen seleccionada se imprimirá u
 </div>
 
 ## Modificar imagen
+
 En caso de que el usuario desee modificar el nombre de algún archivo dentro de la biblioteca de datos, este deberá activarlo con la opción 2, el cual desplegara un menú con las carpetas donde se almacenan las imágenes ya sean las predeterminadas o imágenes nuevas para el programa.
+
 
 <div align="center">
   <img src="https://drive.google.com/uc?export=view&id=1kUhaqw26y_sOaK3h98ffI54g8xeLxaov" alt="Menu de sistema" width="500"/>
@@ -142,6 +153,7 @@ Indistintamente del archivo que el usuario elija el software desplegara una list
 </div>
 
 El usuario una vez renombre la imagen se enviará la actualización de la imagen asimismo un mensaje de verificación de actualización, además de retornar al menú principal.
+
 
 <div align="center">
   <img src="https://drive.google.com/uc?export=view&id=1_olvsFPNk6LND35_EFynuQ7RwxgMz-hF" alt="Menu de sistema" width="500"/>
@@ -158,9 +170,11 @@ El usuario podrá eliminar archivos de la aplicación seleccionando la opción 3
 
 Una vez el usuario escriba el archivo que desea eliminar, la aplicación enviara un mensaje de confirmación para el usuario procurando prevenir eliminaciones no deseadas y posteriormente su confirmación de eliminación de archivo asimismo se desplegara el menú inicial para que el usuario continue con su navegación del software.
 
+
 <div align="center">
   <img src="https://drive.google.com/uc?export=view&id=1D0wyGgtGSMRm5XOgtDB9kNUuGN4MbcCK" alt="Menu de sistema" width="500"/>
 </div>
+
 
 ## Mostrar imágenes cargadas
 
@@ -175,3 +189,10 @@ En caso de que el usuario desee visualizar los archivos ya sean visibles, actual
 
 # Documentacion de Codigo del Proyecto
 La documentacion fue generada con  Sphinx y publicada dentro de paginas de Github donde podra ver en: [Documentacion](https://jctorricor.github.io/documentation/index.html)
+
+
+<div align="center">
+  <img src="https://drive.google.com/uc?export=view&id=1gwnMKvBlB_g5NSP974qnOUlmo7hOuSrL" alt="Menu de sistema" width="500"/>
+</div>
+
+
